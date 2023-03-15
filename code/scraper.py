@@ -5,6 +5,7 @@ import json
 
 url = "https://branham.org/pt/MessageAudio"
 
+
 def fetch(url):
   try:
     response = requests.get(url, headers={"user-agent": "Fake user-agent"})
@@ -12,7 +13,7 @@ def fetch(url):
   except (requests.HTTPError, requests.ReadTimeout):
     print(requests.HTTPError, requests.ReadTimeout)
     return None
-    
+
 
 def listMessage(html):
   selector = Selector(html)
@@ -29,10 +30,10 @@ def listMessage(html):
   print(list)
   return list
 
+
 def writeJson(list):
-  with open('menssgens.json', 'w', encoding='utf-8') as file:
+  with open('sermons.json', 'w', encoding='utf-8') as file:
     json.dump(list, file, ensure_ascii=False)
-  
-print(
-  writeJson(listMessage(fetch(url)))
-)
+
+
+writeJson(listMessage(fetch(url)))
