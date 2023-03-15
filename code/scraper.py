@@ -13,7 +13,7 @@ def fetch(url):
     return None
     
 
-def linkYears(html):
+def listMessage(html):
   selector = Selector(html)
   messages = selector.css("div.messagebox").getall()
   list = []
@@ -29,5 +29,5 @@ def linkYears(html):
 
 
 print(
-  linkYears(fetch(url))
+  listMessage(fetch(url))
 )
