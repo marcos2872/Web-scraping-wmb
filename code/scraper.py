@@ -1,5 +1,6 @@
 import requests
 from parsel import Selector
+import json
 
 
 url = "https://branham.org/pt/MessageAudio"
@@ -25,9 +26,13 @@ def listMessage(html):
       "audio": div.css("a[title='Download Audio']::attr(href)").get() or '',
       "pdf": div.css("a[title='download PDF file']::attr(href)").get()
     })
-  return list  
+  print(list)
+  return list
 
-
+def writeJson(list):
+  with open('menssgens.json', 'w', encoding='utf-8') as file:
+    json.dump(list, file, ensure_ascii=False)
+  
 print(
-  listMessage(fetch(url))
+  writeJson(listMessage(fetch(url)))
 )
